@@ -4,6 +4,9 @@ using UnityEngine;
 using DG.Tweening;
 
 public class Person : MonoBehaviour {
+
+    public bool autonomous = true;
+
     public float speed = 2.0f;
     private float impulseCounter = 1.0f;
 
@@ -35,11 +38,45 @@ public class Person : MonoBehaviour {
 
     private void FixedUpdate()
     {
+        
         impulseCounter -= Time.deltaTime;
-        if(impulseCounter < 0)
+        if (autonomous)
         {
-            impulseCounter = Random.Range(0.6f, 1.6f);
-            transform.GetComponent<Rigidbody2D>().AddForce(new Vector2(Random.Range(-10f, 10f), Random.Range(-10f, 10f) * speed));
+            if (impulseCounter < 0)
+            {
+                impulseCounter = Random.Range(0.6f, 1.6f);
+                Vector2 dir = new Vector2(Random.Range(-10f, 10f), Random.Range(-10f, 10f) * speed);
+                transform.GetComponent<Rigidbody2D>().AddForce(dir);
+
+               
+                    // find index of this unit
+                    int index = 0;
+                    foreach (GameObject g in gameController.personList)
+                    {
+
+                        if (g == this.gameObject)
+                        {
+                            break;
+                        }
+                        else
+                        {
+                            index++;
+                        }
+                                            
+                    }
+                    // Only copy the move if the player has never intervened yet
+                    if (!gameController.interacted)
+                    {
+                        // Move the simulated copy the same - until an interaction has been made
+                        gameController.simulatedPersonList[index].GetComponent<Rigidbody2D>().AddForce(dir);
+                    } else
+                    {
+                        Vector2 dir2 = new Vector2(Random.Range(-10f, 10f), Random.Range(-10f, 10f) * speed);
+                        transform.GetComponent<Rigidbody2D>().AddForce(dir2);
+
+                    }
+            }
+            
         }
     }
 
