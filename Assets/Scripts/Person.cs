@@ -1,12 +1,16 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using DG.Tweening;
 
 public class Person : MonoBehaviour {
     public float speed = 2.0f;
     private float impulseCounter = 1.0f;
 
     private GameController gameController;
+
+    public Color[] outerCircleColours;
+    public Color[] innerCircleColours;
 
     // attributes
     public string badThing;
@@ -18,11 +22,14 @@ public class Person : MonoBehaviour {
         gameController = GameObject.Find("Main Camera").GetComponent<GameController>();
         // pick bad thing from options
         badThing = gameController.badThoughts[Random.Range(0, gameController.badThoughts.Length)];
-        Debug.Log(badThing);
-	}
-	
-	// Update is called once per frame
-	void Update () {
+        // colour circles
+        GameObject.Find("OuterCircle").GetComponent<SpriteRenderer>().color = outerCircleColours[Random.Range(0, outerCircleColours.Length)];
+        GameObject.Find("InnerCircle").GetComponent<SpriteRenderer>().color = innerCircleColours[Random.Range(0, innerCircleColours.Length)];
+
+    }
+
+    // Update is called once per frame
+    void Update () {
 		
 	}
 
@@ -38,14 +45,18 @@ public class Person : MonoBehaviour {
 
     private void CreateText(string s)
     {
-        GameObject g = Instantiate(textObj, transform.position, Quaternion.identity);
+        GameObject g = Instantiate(textObj, transform.position + new Vector3(0, Random.Range(-0.5f, 0.5f),0), Quaternion.identity);
         g.GetComponent<TextMesh>().text = s;
     }
 
     // collision
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        CreateText("Wow");
-
+        // Positive collision
+        // There is a 1/5 chance of saying something
+        if (Random.Range(1, 10) < 3)
+        {
+            CreateText(gameController.interactionThoughts[Random.Range(0, gameController.interactionThoughts.Length)]);
+        }
     }
 }

@@ -21,6 +21,7 @@ GameObject:
   - component: {fileID: 4848867589177792}
   - component: {fileID: 23229244072303142}
   - component: {fileID: 102184059470075138}
+  - component: {fileID: 114915857668687154}
   m_Layer: 0
   m_Name: TextObj
   m_TagString: Untagged
@@ -50,7 +51,6 @@ MeshRenderer:
   m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
-  m_DynamicOccludee: 1
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
@@ -66,7 +66,6 @@ MeshRenderer:
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
-  m_StitchLightmapSeams: 0
   m_SelectedEditorRenderState: 3
   m_MinimumChartSize: 4
   m_AutoUVMaxDistance: 0.5
@@ -89,10 +88,21 @@ TextMesh:
   m_Anchor: 4
   m_Alignment: 1
   m_TabSize: 2
-  m_FontSize: 480
+  m_FontSize: 400
   m_FontStyle: 0
   m_RichText: 1
   m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
   m_Color:
     serializedVersion: 2
     rgba: 4292335608
+--- !u!114 &114915857668687154
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1616155531690506}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fa598ef8925ebf44d9a559aef89b2580, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
