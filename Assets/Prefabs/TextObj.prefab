@@ -22,7 +22,7 @@ GameObject:
   - component: {fileID: 23229244072303142}
   - component: {fileID: 102184059470075138}
   - component: {fileID: 114915857668687154}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: TextObj
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -55,7 +55,7 @@ MeshRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_Materials:
-  - {fileID: 10100, guid: 0000000000000000e000000000000000, type: 0}
+  - {fileID: 2100000, guid: acdb77dc4fe0d424899a090b1c990e86, type: 3}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -91,10 +91,10 @@ TextMesh:
   m_FontSize: 400
   m_FontStyle: 0
   m_RichText: 1
-  m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
+  m_Font: {fileID: 12800000, guid: acdb77dc4fe0d424899a090b1c990e86, type: 3}
   m_Color:
     serializedVersion: 2
-    rgba: 4292335608
+    rgba: 4293939786
 --- !u!114 &114915857668687154
 MonoBehaviour:
   m_ObjectHideFlags: 1

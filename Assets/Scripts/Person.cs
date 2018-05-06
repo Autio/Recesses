@@ -23,8 +23,8 @@ public class Person : MonoBehaviour {
         // pick bad thing from options
         badThing = gameController.badThoughts[Random.Range(0, gameController.badThoughts.Length)];
         // colour circles
-        GameObject.Find("OuterCircle").GetComponent<SpriteRenderer>().color = outerCircleColours[Random.Range(0, outerCircleColours.Length)];
-        GameObject.Find("InnerCircle").GetComponent<SpriteRenderer>().color = innerCircleColours[Random.Range(0, innerCircleColours.Length)];
+        this.transform.Find("OuterCircle").GetComponent<SpriteRenderer>().color = outerCircleColours[Random.Range(0, outerCircleColours.Length)];
+        this.transform.Find("InnerCircle").GetComponent<SpriteRenderer>().color = innerCircleColours[Random.Range(0, innerCircleColours.Length)];
 
     }
 
@@ -45,7 +45,7 @@ public class Person : MonoBehaviour {
 
     private void CreateText(string s)
     {
-        GameObject g = Instantiate(textObj, transform.position + new Vector3(0, Random.Range(-0.5f, 0.5f),0), Quaternion.identity);
+        GameObject g = Instantiate(textObj, transform.position + new Vector3(0, Random.Range(-0.5f, 0.5f),-2), Quaternion.identity);
         g.GetComponent<TextMesh>().text = s;
     }
 
@@ -54,9 +54,12 @@ public class Person : MonoBehaviour {
     {
         // Positive collision
         // There is a 1/5 chance of saying something
-        if (Random.Range(1, 10) < 3)
+        if (collision.transform.tag == "Person")
         {
-            CreateText(gameController.interactionThoughts[Random.Range(0, gameController.interactionThoughts.Length)]);
+            if (Random.Range(0, 10) < 1)
+            {
+                CreateText(gameController.interactionThoughts[Random.Range(0, gameController.interactionThoughts.Length)]);
+            }
         }
     }
 }

@@ -1,0 +1,21 @@
+fileFormatVersion: 2
+guid: 28b5c090da603cf4786c2c8c56e06e9b
+timeCreated: 1525633418
+licenseType: Free
+TrueTypeFontImporter:
+  serializedVersion: 4
+  fontSize: 16
+  forceTextureCase: -2
+  characterSpacing: 0
+  characterPadding: 1
+  includeFontData: 1
+  fontName: Be True To Your School
+  fontNames:
+  - Be True To Your School
+  fallbackFontReferences: []
+  customCharacters: 
+  fontRenderingMode: 0
+  ascentCalculationMode: 1
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

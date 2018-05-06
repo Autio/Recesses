@@ -21,7 +21,7 @@ GameObject:
   - component: {fileID: 4627270035562450}
   - component: {fileID: 212648613343699670}
   m_Layer: 0
-  m_Name: Circle
+  m_Name: OuterCircle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -37,7 +37,7 @@ GameObject:
   - component: {fileID: 4838115761310314}
   - component: {fileID: 212646717853549116}
   m_Layer: 0
-  m_Name: Circle (1)
+  m_Name: InnerCircle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -58,7 +58,7 @@ GameObject:
   - component: {fileID: 58504196411092096}
   m_Layer: 0
   m_Name: Person
-  m_TagString: Untagged
+  m_TagString: Person
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -190,8 +190,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 0.2
-  outerCircleColours: []
-  innerCircleColours: []
+  outerCircleColours:
+  - {r: 0.7691506, g: 0.5547145, b: 0.99264705, a: 0.8627451}
+  - {r: 0.5547145, g: 0.829555, b: 0.99264705, a: 0.8627451}
+  - {r: 0.5547145, g: 0.99264705, b: 0.70270556, a: 0.8627451}
+  - {r: 0.99264705, g: 0.81747407, b: 0.5547145, a: 0.8627451}
+  - {r: 0.99264705, g: 0.63626057, b: 0.5547145, a: 0.8627451}
+  - {r: 0.99264705, g: 0.5547145, b: 0.5547145, a: 0.8627451}
+  - {r: 0.8778785, g: 0.99264705, b: 0.5547145, a: 0.8627451}
+  - {r: 0.5547145, g: 0.8657976, b: 0.99264705, a: 0.8627451}
+  - {r: 0.8014706, g: 0.6148401, b: 0.47145328, a: 0.8627451}
+  - {r: 0.7691506, g: 0.5547145, b: 0.99264705, a: 0.8627451}
+  innerCircleColours:
+  - {r: 0.9632353, g: 0.41787413, b: 0.41787413, a: 1}
+  - {r: 0.17647058, g: 1, b: 0.6933062, a: 1}
   badThing: 
   textObj: {fileID: 1616155531690506, guid: 0f213842abc923f4e836c56e068e6bbc, type: 2}
 --- !u!212 &212646717853549116
@@ -266,7 +278,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 20
+  m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: a70f1f9785020aa4d8122c273a60709e, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0

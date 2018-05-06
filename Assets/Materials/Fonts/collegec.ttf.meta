@@ -1,0 +1,21 @@
+fileFormatVersion: 2
+guid: 1617778f4cbc01d4a98b603b91a454fc
+timeCreated: 1525633268
+licenseType: Free
+TrueTypeFontImporter:
+  serializedVersion: 4
+  fontSize: 16
+  forceTextureCase: -2
+  characterSpacing: 0
+  characterPadding: 1
+  includeFontData: 1
+  fontName: College Condensed
+  fontNames:
+  - College Condensed
+  fallbackFontReferences: []
+  customCharacters: 
+  fontRenderingMode: 0
+  ascentCalculationMode: 1
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
