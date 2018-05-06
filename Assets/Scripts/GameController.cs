@@ -6,6 +6,10 @@ public class GameController : MonoBehaviour {
 
     public int persons;
     public GameObject person;
+    public GameObject nudge;
+
+    private int interactionCount = 0;
+    private int bumpCount;
 
     public string[] interactionThoughts;
     public string[] badThoughts;
@@ -35,10 +39,34 @@ public class GameController : MonoBehaviour {
 	}
 	
 	// Update is called once per frame
-	void Update () {
+	void FixedUpdate () {
+        float distance = 50f;
+        if(Input.GetMouseButtonDown(0))
+        {
+
+                //create a ray cast and set it to the mouses cursor position in game
+                Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+                RaycastHit hit;
+                if (Physics.Raycast(ray, out hit, distance))
+                {
+                    //draw invisible ray cast/vector
+                    Debug.DrawLine(ray.origin, hit.point);
+                    //log hit area to the console
+                    Debug.Log(hit.point);
+                Instantiate(nudge, hit.point, Quaternion.identity);
+
+                }
+            
+        }
 		if(Input.GetKeyDown(KeyCode.I))
         {
             interacted = true;
         }
 	}
+
+    void Nudge()
+    {
+        // Create nudge in the clicked location
+
+    }
 }

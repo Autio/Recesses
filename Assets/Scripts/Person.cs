@@ -17,7 +17,8 @@ public class Person : MonoBehaviour {
 
     // attributes
     public string badThing;
-
+    [Range(0,200)]
+    public int happiness = 200;
 
     public GameObject textObj;
 	// Use this for initialization
@@ -27,7 +28,7 @@ public class Person : MonoBehaviour {
         badThing = gameController.badThoughts[Random.Range(0, gameController.badThoughts.Length)];
         // colour circles
         this.transform.Find("OuterCircle").GetComponent<SpriteRenderer>().color = outerCircleColours[Random.Range(0, outerCircleColours.Length)];
-        this.transform.Find("InnerCircle").GetComponent<SpriteRenderer>().color = innerCircleColours[Random.Range(0, innerCircleColours.Length)];
+        this.transform.Find("InnerCircle").GetComponent<SpriteRenderer>().color = innerCircleColours[1];
 
     }
 
@@ -37,6 +38,28 @@ public class Person : MonoBehaviour {
 	}
 
     public Vector2 queuedForce = new Vector2(0,0);
+    int happinessIncrement = 8;
+    void Sadder()
+    {
+        happiness -= happinessIncrement;
+        float lerpo = Mathf.Round(happiness) / 200.0f;
+        Debug.Log(lerpo);
+        this.transform.Find("InnerCircle").GetComponent<SpriteRenderer>().color = Color.Lerp(innerCircleColours[0], innerCircleColours[1], lerpo );
+
+    }
+
+    void Happier()
+    {
+        happiness += 50;
+        if(happiness >= 200)
+        {
+            happiness = 200;
+        }
+        float lerpo = Mathf.Round(happiness) / 200.0f;
+        Debug.Log(lerpo);
+        this.transform.Find("InnerCircle").GetComponent<SpriteRenderer>().color = Color.Lerp(innerCircleColours[0], innerCircleColours[1], lerpo);
+
+    }
 
     private void FixedUpdate()
     {
@@ -46,11 +69,30 @@ public class Person : MonoBehaviour {
         {
             if (impulseCounter < 0)
             {
+                if (Random.Range(0, 10) < 4)
+                {
+                    // remove happiness
+                    Sadder();
+                }
                 impulseCounter = Random.Range(0.6f, 1.6f);
-                Vector2 dir = new Vector2(Random.Range(-10f, 10f), Random.Range(-10f, 10f) * speed);
-                transform.GetComponent<Rigidbody2D>().AddForce(dir);
 
-               
+                if (happiness > 35)
+                {
+                    Vector2 dir = new Vector2(Random.Range(-10f, 10f), Random.Range(-10f, 10f) * speed);
+                    transform.GetComponent<Rigidbody2D>().AddForce(dir);
+
+                    if (Random.Range(0, 100) < 2)
+                    {
+                        if (happiness > 50)
+                        {
+                            CreateText(gameController.interactionThoughts[Random.Range(0, gameController.interactionThoughts.Length)], Color.blue);
+                        }
+                        else
+                        {
+                            CreateText(badThing, Color.gray);
+                        }
+                    }
+
                     // find index of this unit
                     int index = 0;
                     foreach (GameObject g in gameController.personList)
@@ -64,18 +106,20 @@ public class Person : MonoBehaviour {
                         {
                             index++;
                         }
-                                            
+
                     }
                     // Only copy the move if the player has never intervened yet
                     if (!gameController.interacted)
                     {
                         // Move the simulated copy the same - until an interaction has been made
                         gameController.simulatedPersonList[index].GetComponent<Person>().queuedForce = dir;
-                    } else
+                    }
+                    else
                     {
                         Vector2 dir2 = new Vector2(Random.Range(-10f, 10f), Random.Range(-10f, 10f) * speed);
                         gameController.simulatedPersonList[index].GetComponent<Person>().queuedForce = dir2;
 
+                    }
                 }
             } 
             
@@ -90,22 +134,37 @@ public class Person : MonoBehaviour {
 
     }
 
-    private void CreateText(string s)
+    private void CreateText(string s, Color textColor)
     {
-        GameObject g = Instantiate(textObj, transform.position + new Vector3(0, Random.Range(-0.5f, 0.5f),-2), Quaternion.identity);
+        float offset = Random.Range(-0.6f, -0.3f);
+        if(Random.Range(1,10) < 5)
+        {
+            offset = -offset;
+        }
+        GameObject g = Instantiate(textObj, transform.position + new Vector3(0, offset,-2), Quaternion.identity);
         g.GetComponent<TextMesh>().text = s;
+        g.GetComponent<TextMesh>().color = textColor;
     }
 
     // collision
     private void OnCollisionEnter2D(Collision2D collision)
     {
         // Positive collision
+        // increase happiness
+        Happier();
         // There is a 1/5 chance of saying something
         if (collision.transform.tag == "Person")
         {
+            
             if (Random.Range(0, 10) < 1)
             {
-                CreateText(gameController.interactionThoughts[Random.Range(0, gameController.interactionThoughts.Length)]);
+                if (happiness > 75)
+                {
+                    CreateText(gameController.interactionThoughts[Random.Range(0, gameController.interactionThoughts.Length)], Color.blue);
+                } else
+                {
+                    CreateText(badThing, Color.gray);
+                }
             }
         }
     }
