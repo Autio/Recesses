@@ -36,6 +36,8 @@ public class Person : MonoBehaviour {
 		
 	}
 
+    public Vector2 queuedForce = new Vector2(0,0);
+
     private void FixedUpdate()
     {
         
@@ -68,16 +70,24 @@ public class Person : MonoBehaviour {
                     if (!gameController.interacted)
                     {
                         // Move the simulated copy the same - until an interaction has been made
-                        gameController.simulatedPersonList[index].GetComponent<Rigidbody2D>().AddForce(dir);
+                        gameController.simulatedPersonList[index].GetComponent<Person>().queuedForce = dir;
                     } else
                     {
                         Vector2 dir2 = new Vector2(Random.Range(-10f, 10f), Random.Range(-10f, 10f) * speed);
-                        transform.GetComponent<Rigidbody2D>().AddForce(dir2);
+                        gameController.simulatedPersonList[index].GetComponent<Person>().queuedForce = dir2;
 
-                    }
-            }
+                }
+            } 
             
+        } else
+        {
+            if(queuedForce != new Vector2(0,0))
+            {
+                transform.GetComponent<Rigidbody2D>().AddForce(queuedForce);
+                queuedForce = new Vector2(0,0);
+            }
         }
+
     }
 
     private void CreateText(string s)
