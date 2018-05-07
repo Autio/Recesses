@@ -37,7 +37,7 @@ public class Person : MonoBehaviour {
         {
             this.transform.Find("OuterCircle").GetComponent<SpriteRenderer>().color = Color.red;
             this.transform.Find("InnerCircle").GetComponent<SpriteRenderer>().color = Color.gray;
-
+            speed = speed * 1.5f;
 
         }
 
@@ -102,10 +102,12 @@ public class Person : MonoBehaviour {
 
                 if (happiness > 35)
                 {
+                   
                     Vector2 dir = new Vector2(Random.Range(-10f, 10f), Random.Range(-10f, 10f) * speed);
+                    
                     transform.GetComponent<Rigidbody2D>().AddForce(dir);
 
-                        if (Random.Range(0, 100) < 2)
+                        if (Random.Range(0, 100) < 1)
                         {
                             if (happiness > 50)
                             {
@@ -233,7 +235,7 @@ public class Person : MonoBehaviour {
                     {
                         if (talkCooldown < 0)
                         {
-                            if (Random.Range(0, 20) < 1)
+                            if (Random.Range(0, 20) < 3)
                             {
 
                                 if (happiness > 75)

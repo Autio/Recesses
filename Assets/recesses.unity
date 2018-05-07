@@ -1627,13 +1627,16 @@ MonoBehaviour:
   - Maybe I should intervene
   - I hope others are as happy as I am
   - I am if we are
-  - Mutual recognition is essential for freedom
+  - No freedom without mutual recognition
   - It's nice being here
   - Cool beans
   - No complaints
   - Hmmm
   - I wonder if they ever think of me
   - I have such a crush
+  - I am not alone
+  - Wonder what it's like to be somebody else?
+  - Ok then
   personInteractions: 0
   simulatedPersonInteractions: 0
   interacted: 0
@@ -2204,11 +2207,16 @@ Prefab:
     - target: {fileID: 102184059470075138, guid: 0f213842abc923f4e836c56e068e6bbc,
         type: 2}
       propertyPath: m_Text
-      value: "Love is Respect - Even one careful intervention can make a big difference\nResearch
-        has shown that bystander action can play a big role in preventing violence\n\nHelp
-        can come in many forms, from online support to holding someone\u2019s hand
-        \nthrough an ordeal through to calling emergency services, as needed.\r\n\r\n\nhttps://itch.io/jam/2018-lifelove-game-design-challenge\n\nPress
-        R to restart"
+      value: 'Love is Respect - Even one careful intervention can make a big difference
+
+        Research has shown that bystander action can play a big role in preventing
+        violence
+
+
+        https://itch.io/jam/2018-lifelove-game-design-challenge
+
+
+        Press R to restart'
       objectReference: {fileID: 0}
     - target: {fileID: 114915857668687154, guid: 0f213842abc923f4e836c56e068e6bbc,
         type: 2}
@@ -2218,7 +2226,7 @@ Prefab:
     - target: {fileID: 102184059470075138, guid: 0f213842abc923f4e836c56e068e6bbc,
         type: 2}
       propertyPath: m_Anchor
-      value: 3
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 102184059470075138, guid: 0f213842abc923f4e836c56e068e6bbc,
         type: 2}
