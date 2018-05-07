@@ -56,6 +56,7 @@ GameObject:
   - component: {fileID: 50693784830884000}
   - component: {fileID: 114403836530261090}
   - component: {fileID: 58504196411092096}
+  - component: {fileID: 114342938205441710}
   m_Layer: 0
   m_Name: Person
   m_TagString: Person
@@ -178,6 +179,21 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 0.6
+--- !u!114 &114342938205441710
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1914567029702360}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 623c5eeb46ecd4a43bc695d031c0720f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bpm: 20
+  beat: 0
+  nthBeat: 0
+  intensity: 0.05
 --- !u!114 &114403836530261090
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -190,7 +206,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   autonomous: 1
-  speed: 0.2
+  interactions: 0
+  bully: 0
+  speed: 0.1
   outerCircleColours:
   - {r: 0.7691506, g: 0.5547145, b: 0.99264705, a: 0.8627451}
   - {r: 0.5547145, g: 0.829555, b: 0.99264705, a: 0.8627451}
@@ -203,7 +221,7 @@ MonoBehaviour:
   - {r: 0.8014706, g: 0.6148401, b: 0.47145328, a: 0.8627451}
   - {r: 0.85294116, g: 0.8539554, b: 1, a: 0.8627451}
   - {r: 0.19993512, g: 0.63235295, b: 0.5249941, a: 0.8627451}
-  - {r: 0.9485294, g: 0.40557808, b: 0.3696475, a: 0.8627451}
+  - {r: 0.3696475, g: 0.7808533, b: 0.9485294, a: 0.8627451}
   - {r: 0.33088237, g: 1, b: 0.9723123, a: 0.8627451}
   - {r: 0.5077992, g: 0.070826136, b: 0.9632353, a: 0.8627451}
   innerCircleColours:

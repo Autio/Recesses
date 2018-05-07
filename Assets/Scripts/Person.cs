@@ -6,6 +6,9 @@ using DG.Tweening;
 public class Person : MonoBehaviour {
 
     public bool autonomous = true;
+    public int interactions = 0;
+    public bool bully = false;
+    private float talkCooldown = 2.0f;
 
     public float speed = 2.0f;
     private float impulseCounter = 1.0f;
@@ -30,6 +33,16 @@ public class Person : MonoBehaviour {
         this.transform.Find("OuterCircle").GetComponent<SpriteRenderer>().color = outerCircleColours[Random.Range(0, outerCircleColours.Length)];
         this.transform.Find("InnerCircle").GetComponent<SpriteRenderer>().color = innerCircleColours[1];
 
+        if(bully)
+        {
+            this.transform.Find("OuterCircle").GetComponent<SpriteRenderer>().color = Color.red;
+            this.transform.Find("InnerCircle").GetComponent<SpriteRenderer>().color = Color.gray;
+
+
+        }
+
+
+
     }
 
     // Update is called once per frame
@@ -41,35 +54,46 @@ public class Person : MonoBehaviour {
     int happinessIncrement = 8;
     void Sadder()
     {
-        happiness -= happinessIncrement;
-        float lerpo = Mathf.Round(happiness) / 200.0f;
-        Debug.Log(lerpo);
-        this.transform.Find("InnerCircle").GetComponent<SpriteRenderer>().color = Color.Lerp(innerCircleColours[0], innerCircleColours[1], lerpo );
-
+        if(!bully)
+        { 
+            happiness -= happinessIncrement;
+            if(!autonomous)
+            {
+                happiness -= 2;
+            }
+            float lerpo = Mathf.Round(happiness) / 200.0f;
+            Debug.Log(lerpo);
+            this.transform.Find("InnerCircle").GetComponent<SpriteRenderer>().color = Color.Lerp(innerCircleColours[0], innerCircleColours[1], lerpo );
+        }
     }
 
     void Happier()
     {
-        happiness += 50;
-        if(happiness >= 200)
+        if (!bully)
         {
-            happiness = 200;
+            happiness += 50;
+            if (happiness >= 200)
+            {
+                happiness = 200;
+            }
+            float lerpo = Mathf.Round(happiness) / 200.0f;
+            Debug.Log(lerpo);
+            this.transform.Find("InnerCircle").GetComponent<SpriteRenderer>().color = Color.Lerp(innerCircleColours[0], innerCircleColours[1], lerpo);
         }
-        float lerpo = Mathf.Round(happiness) / 200.0f;
-        Debug.Log(lerpo);
-        this.transform.Find("InnerCircle").GetComponent<SpriteRenderer>().color = Color.Lerp(innerCircleColours[0], innerCircleColours[1], lerpo);
-
     }
 
     private void FixedUpdate()
     {
-        
+        talkCooldown -= Time.deltaTime;
         impulseCounter -= Time.deltaTime;
+        bool sadder = Random.Range(0, 10) < 4;
+
         if (autonomous)
         {
             if (impulseCounter < 0)
             {
-                if (Random.Range(0, 10) < 4)
+
+                if (sadder)
                 {
                     // remove happiness
                     Sadder();
@@ -81,17 +105,21 @@ public class Person : MonoBehaviour {
                     Vector2 dir = new Vector2(Random.Range(-10f, 10f), Random.Range(-10f, 10f) * speed);
                     transform.GetComponent<Rigidbody2D>().AddForce(dir);
 
-                    if (Random.Range(0, 100) < 2)
-                    {
-                        if (happiness > 50)
+                        if (Random.Range(0, 100) < 2)
                         {
-                            CreateText(gameController.interactionThoughts[Random.Range(0, gameController.interactionThoughts.Length)], Color.blue);
+                            if (happiness > 50)
+                            {
+                            if (!bully)
+                            {
+                                CreateText(gameController.interactionThoughts[Random.Range(0, gameController.interactionThoughts.Length)], Color.blue);
+                            }
+                            }
+                            else
+                            {
+                                CreateText(badThing, Color.gray);
+                            }
                         }
-                        else
-                        {
-                            CreateText(badThing, Color.gray);
-                        }
-                    }
+
 
                     // find index of this unit
                     int index = 0;
@@ -113,12 +141,17 @@ public class Person : MonoBehaviour {
                     {
                         // Move the simulated copy the same - until an interaction has been made
                         gameController.simulatedPersonList[index].GetComponent<Person>().queuedForce = dir;
+
                     }
                     else
                     {
                         Vector2 dir2 = new Vector2(Random.Range(-10f, 10f), Random.Range(-10f, 10f) * speed);
                         gameController.simulatedPersonList[index].GetComponent<Person>().queuedForce = dir2;
 
+                    }
+                    if (sadder)
+                    {
+                        gameController.simulatedPersonList[index].GetComponent<Person>().Sadder();
                     }
                 }
             } 
@@ -134,38 +167,91 @@ public class Person : MonoBehaviour {
 
     }
 
-    private void CreateText(string s, Color textColor)
+    private void CreateText(string s, Color textColor, float x = 0, float y = 0)
     {
-        float offset = Random.Range(-0.6f, -0.3f);
-        if(Random.Range(1,10) < 5)
+        if (gameController.state == GameController.gameStates.playing)
         {
-            offset = -offset;
+            Vector3 pos;
+            if (x == 0 && y == 0)
+            {
+                float offset = Random.Range(-0.6f, -0.3f);
+                if (Random.Range(1, 10) < 5)
+                {
+                    offset = -offset;
+                }
+                pos = transform.position + new Vector3(0, offset, -2);
+            }
+            else
+            {
+                pos = new Vector3(x, y, 0);
+            }
+
+            GameObject g = Instantiate(textObj, pos, Quaternion.identity);
+            g.GetComponent<TextMesh>().text = s;
+            g.GetComponent<TextMesh>().color = textColor;
         }
-        GameObject g = Instantiate(textObj, transform.position + new Vector3(0, offset,-2), Quaternion.identity);
-        g.GetComponent<TextMesh>().text = s;
-        g.GetComponent<TextMesh>().color = textColor;
     }
 
     // collision
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        // Positive collision
-        // increase happiness
-        Happier();
-        // There is a 1/5 chance of saying something
-        if (collision.transform.tag == "Person")
+        if (gameController.state == GameController.gameStates.playing)
         {
-            
-            if (Random.Range(0, 10) < 1)
+            // Positive collision
+            // increase happiness
+
+            // There is a 1/5 chance of saying something
+            if (collision.transform.tag == "Person")
             {
-                if (happiness > 75)
+
+                if (autonomous)
                 {
-                    CreateText(gameController.interactionThoughts[Random.Range(0, gameController.interactionThoughts.Length)], Color.blue);
-                } else
+                    gameController.personInteractions += 1;
+                }
+                else
                 {
-                    CreateText(badThing, Color.gray);
+                    gameController.simulatedPersonInteractions += 1;
+                }
+
+                if (collision.transform.GetComponent<Person>().bully)
+                {
+                    Sadder();
+                    if (talkCooldown < 0)
+                    {
+                        if (Random.Range(0, 10) < 7)
+                        {
+                            CreateText(gameController.bullyThoughts[Random.Range(0, gameController.bullyThoughts.Length)], Color.black, collision.transform.position.x, collision.transform.position.y);
+                        }
+                        talkCooldown = 2.0f;
+                    }
+
+                }
+                else
+                {
+                    Happier();
+                    if (!bully)
+                    {
+                        if (talkCooldown < 0)
+                        {
+                            if (Random.Range(0, 20) < 1)
+                            {
+
+                                if (happiness > 75)
+                                {
+                                    CreateText(gameController.interactionThoughts[Random.Range(0, gameController.interactionThoughts.Length)], Color.blue);
+                                }
+                                else
+                                {
+                                    CreateText(badThing, Color.gray);
+                                }
+                            }
+                            talkCooldown = 2.0f;
+                        }
+                    }
+
                 }
             }
         }
     }
-}
+    }
+
