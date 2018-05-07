@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameController : MonoBehaviour {
 
@@ -20,6 +21,7 @@ public class GameController : MonoBehaviour {
     public string[] interactionThoughts;
     public string[] badThoughts;
     public string[] bullyThoughts;
+    public string[] idleThoughts;
 
     public int personInteractions;
     public int simulatedPersonInteractions;
@@ -95,9 +97,19 @@ public class GameController : MonoBehaviour {
         }
 
 	}
-	
+    public void Reset()
+    {
+        SceneManager.LoadScene(0);
+    }
+    // Update is called once per frame
+    
 	// Update is called once per frame
 	void FixedUpdate () {
+
+        if(Input.GetKeyDown(KeyCode.R))
+            {
+            Reset();
+        }
 
         if (state == gameStates.starting)
         {

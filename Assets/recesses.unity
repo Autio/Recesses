@@ -782,6 +782,89 @@ MeshFilter:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 483556421}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1001 &499737837
+Prefab:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 1232124227}
+    m_Modifications:
+    - target: {fileID: 4848867589177792, guid: 0f213842abc923f4e836c56e068e6bbc, type: 2}
+      propertyPath: m_LocalPosition.x
+      value: -8.7
+      objectReference: {fileID: 0}
+    - target: {fileID: 4848867589177792, guid: 0f213842abc923f4e836c56e068e6bbc, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: -4.35
+      objectReference: {fileID: 0}
+    - target: {fileID: 4848867589177792, guid: 0f213842abc923f4e836c56e068e6bbc, type: 2}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4848867589177792, guid: 0f213842abc923f4e836c56e068e6bbc, type: 2}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4848867589177792, guid: 0f213842abc923f4e836c56e068e6bbc, type: 2}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4848867589177792, guid: 0f213842abc923f4e836c56e068e6bbc, type: 2}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4848867589177792, guid: 0f213842abc923f4e836c56e068e6bbc, type: 2}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4848867589177792, guid: 0f213842abc923f4e836c56e068e6bbc, type: 2}
+      propertyPath: m_RootOrder
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 1616155531690506, guid: 0f213842abc923f4e836c56e068e6bbc, type: 2}
+      propertyPath: m_Name
+      value: Instructions
+      objectReference: {fileID: 0}
+    - target: {fileID: 102184059470075138, guid: 0f213842abc923f4e836c56e068e6bbc,
+        type: 2}
+      propertyPath: m_Text
+      value: 'Click on the playground to intervene and bring people closer together
+
+        Lonely people can get sadder and bullies may try and intimidate people'
+      objectReference: {fileID: 0}
+    - target: {fileID: 114915857668687154, guid: 0f213842abc923f4e836c56e068e6bbc,
+        type: 2}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 102184059470075138, guid: 0f213842abc923f4e836c56e068e6bbc,
+        type: 2}
+      propertyPath: m_Anchor
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 102184059470075138, guid: 0f213842abc923f4e836c56e068e6bbc,
+        type: 2}
+      propertyPath: m_Alignment
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 102184059470075138, guid: 0f213842abc923f4e836c56e068e6bbc,
+        type: 2}
+      propertyPath: m_Color.rgba
+      value: 4294958042
+      objectReference: {fileID: 0}
+    - target: {fileID: 102184059470075138, guid: 0f213842abc923f4e836c56e068e6bbc,
+        type: 2}
+      propertyPath: m_FontSize
+      value: 300
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 100100000, guid: 0f213842abc923f4e836c56e068e6bbc, type: 2}
+  m_IsPrefabParent: 0
+--- !u!4 &499737838 stripped
+Transform:
+  m_PrefabParentObject: {fileID: 4848867589177792, guid: 0f213842abc923f4e836c56e068e6bbc,
+    type: 2}
+  m_PrefabInternal: {fileID: 499737837}
 --- !u!1001 &521787505
 Prefab:
   m_ObjectHideFlags: 0
@@ -1494,8 +1577,8 @@ MonoBehaviour:
   - That was fun
   - See you later!
   - Would you like to go see a movie with me?
-  - Maths is awesome
-  - Sunny days just make me glad
+  - 'Tell you what: maths is awesome'
+  - Sunny days just make you happy, don't you agree?
   - Looking forward to the party on the weekend
   - I've got to remember to study tonight
   - High five!
@@ -1515,6 +1598,7 @@ MonoBehaviour:
   - Heyyy
   - Love is Respect
   - Heyyy
+  - Would you like to hang out sometime?
   badThoughts:
   - I wish dad would drink less
   - I wish mum and sis would get along
@@ -1530,13 +1614,26 @@ MonoBehaviour:
   - Out of my way
   - Give it here
   - Well look who it is
-  - Dance
+  - Dance, punk
   - Do as I say
-  - Watch out
+  - Watch out already
   - Weak
-  - '...'
+  - '!!!'
   - Haa haa
   - I'll get you
+  idleThoughts:
+  - Life is pretty nice
+  - Love is Respect
+  - Maybe I should intervene
+  - I hope others are as happy as I am
+  - I am if we are
+  - Mutual recognition is essential for freedom
+  - It's nice being here
+  - Cool beans
+  - No complaints
+  - Hmmm
+  - I wonder if they ever think of me
+  - I have such a crush
   personInteractions: 0
   simulatedPersonInteractions: 0
   interacted: 0
@@ -1561,6 +1658,9 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 3463058e0db5f9446a2a4b069f36b2ee, type: 3}
   - {fileID: 8300000, guid: 6212a1425775bce4b914361382413505, type: 3}
   - {fileID: 8300000, guid: 2f3d4e53d44ca114b94fd617f1f6c02f, type: 3}
+  - {fileID: 8300000, guid: 7f6ec136e144cee4cb94d275b3161ccf, type: 3}
+  - {fileID: 8300000, guid: 689ba43504240e048a410626b61fc47e, type: 3}
+  - {fileID: 8300000, guid: a8e9e777695345448aa09ae97c3d3496, type: 3}
   - {fileID: 8300000, guid: a5b437faa98439f4e80a85127c6ff0d9, type: 3}
   currentClip: {fileID: 0}
 --- !u!82 &817867939
@@ -1959,6 +2059,7 @@ Transform:
   - {fileID: 851075926}
   - {fileID: 545859176}
   - {fileID: 1729495167}
+  - {fileID: 499737838}
   m_Father: {fileID: 0}
   m_RootOrder: 16
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -2103,7 +2204,11 @@ Prefab:
     - target: {fileID: 102184059470075138, guid: 0f213842abc923f4e836c56e068e6bbc,
         type: 2}
       propertyPath: m_Text
-      value: Love is Respect - Even one careful intervention can make a big difference
+      value: "Love is Respect - Even one careful intervention can make a big difference\nResearch
+        has shown that bystander action can play a big role in preventing violence\n\nHelp
+        can come in many forms, from online support to holding someone\u2019s hand
+        \nthrough an ordeal through to calling emergency services, as needed.\r\n\r\n\nhttps://itch.io/jam/2018-lifelove-game-design-challenge\n\nPress
+        R to restart"
       objectReference: {fileID: 0}
     - target: {fileID: 114915857668687154, guid: 0f213842abc923f4e836c56e068e6bbc,
         type: 2}

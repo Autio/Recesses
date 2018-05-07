@@ -59,7 +59,7 @@ public class Person : MonoBehaviour {
             happiness -= happinessIncrement;
             if(!autonomous)
             {
-                happiness -= 2;
+                happiness -= 4;
             }
             float lerpo = Mathf.Round(happiness) / 200.0f;
             Debug.Log(lerpo);
@@ -111,7 +111,7 @@ public class Person : MonoBehaviour {
                             {
                             if (!bully)
                             {
-                                CreateText(gameController.interactionThoughts[Random.Range(0, gameController.interactionThoughts.Length)], Color.blue);
+                                CreateText(gameController.idleThoughts[Random.Range(0, gameController.idleThoughts.Length)], Color.white);
                             }
                             }
                             else
@@ -238,7 +238,12 @@ public class Person : MonoBehaviour {
 
                                 if (happiness > 75)
                                 {
-                                    CreateText(gameController.interactionThoughts[Random.Range(0, gameController.interactionThoughts.Length)], Color.blue);
+                                    Color c = Color.blue;
+                                    if(Random.Range(1,10) < 5)
+                                    {
+                                        c = Color.blue;
+                                    }
+                                    CreateText(gameController.interactionThoughts[Random.Range(0, gameController.interactionThoughts.Length)], c);
                                 }
                                 else
                                 {
